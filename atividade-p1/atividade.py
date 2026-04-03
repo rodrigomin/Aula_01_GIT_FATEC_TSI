@@ -58,27 +58,27 @@ def imposto(esc):
             renda = float(input("Insira sua renda mensal aqui: \n"))
             if(renda <= 2428.80):
                 red = reducao(renda)
+                renda = renda*12
                 deducao = (renda * 0.15) - red
-                deducao*=12
-                rendaliquida = (renda*12) - deducao
+                rendaliquida = (renda) - deducao
                 return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
             elif (renda > 2826.66 and renda <= 3751.05):
                 red = reducao(renda)
+                renda = renda*12
                 deducao = (renda * 0.15) - red
-                deducao*=12
-                rendaliquida = (renda*12) - deducao
+                rendaliquida = (renda) - deducao
                 return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
             elif (renda > 3751.06 and renda <= 4664.68):
                 red = reducao(renda)
+                renda = renda*12
                 deducao = (renda * 0.15) - red
-                deducao*=12
-                rendaliquida = (renda*12) - deducao
+                rendaliquida = (renda) - deducao
                 return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
             elif (renda > 4664.68):
                 red = reducao(renda)
+                renda = renda*12
                 deducao = (renda * 0.15) - red
-                deducao*=12
-                rendaliquida = (renda*12) - deducao
+                rendaliquida = (renda) - deducao
                 return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
         case 2:
             print("==================================================================== \n")
