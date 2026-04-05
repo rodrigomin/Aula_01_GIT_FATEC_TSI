@@ -4,101 +4,79 @@
 
 # use esse site https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2026/01/nova-tabela-do-ir-veja-faixas-e-aliquotas-e-saiba-mais-sobre-medida-que-isenta-o-pagamento-para-quem-ganha-ate-r-5-mil
 
+#reducao
 def reducao(renda):
     if renda < 5000:
         return 312.89
-    elif (renda >= 5000.01 and renda < 7350):
+    elif renda < 7350:
         return 978.62 - (0.133145 * renda)
-    elif (renda > 7350.01):
-        return 0
     else:
         return 0
-    
-def imposto(esc):
-    match (esc):
-        case 0:
-            
-            print('\n')
-            print("===================================================================== \n")
-            
-            renda = float(input("Insira sua renda mensal aqui: \n"))
-            
-            print("==================================================================== \n")
 
-            if (renda <= 2428.80):
-                red = reducao(renda)
-                deducao = (renda * 0.15) - red
-                deducao if deducao >= 0 else 0
-                
-                rendaliquida = renda - deducao
-                return ("Seu imposto de renda é " + str(deducao) + " e sua Renda Líquida é " + str(rendaliquida))
-            elif (renda > 2826.66 and renda <= 3751.05):
-                red = reducao(renda)
-                deducao = (renda * 0.15) - red
-                deducao if deducao >= 0 else 0
-                
-                rendaliquida = renda - deducao
-                return ("Seu imposto de renda é " + str(deducao) + " e sua Renda Líquida é " + str(rendaliquida))
-            elif (renda > 3751.06 and renda <= 4664.68):
-                red = reducao(renda)
-                deducao = (renda * 0.15) - red
-                deducao if deducao >= 0 else 0
-                
-                rendaliquida = renda - deducao
-                return ("Seu imposto de renda é " + str(deducao) + " e sua Renda Líquida é " + str(rendaliquida))
-            elif (renda > 4664.68):
-                red = reducao(renda)
-                deducao = (renda * 0.15) - red
-                deducao if deducao >= 0 else 0
-                
-                rendaliquida = renda - deducao
-                return ("Seu imposto de renda é " + str(deducao) + " e sua Renda Líquida é " + str(rendaliquida))
-            
-        case 1:
-            renda = float(input("Insira sua renda mensal aqui: \n"))
-            if(renda <= 2428.80):
-                red = reducao(renda)
-                renda = renda*12
-                deducao = (renda * 0.15) - red
-                rendaliquida = (renda) - deducao
-                return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
-            elif (renda > 2826.66 and renda <= 3751.05):
-                red = reducao(renda)
-                renda = renda*12
-                deducao = (renda * 0.15) - red
-                rendaliquida = (renda) - deducao
-                return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
-            elif (renda > 3751.06 and renda <= 4664.68):
-                red = reducao(renda)
-                renda = renda*12
-                deducao = (renda * 0.15) - red
-                rendaliquida = (renda) - deducao
-                return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
-            elif (renda > 4664.68):
-                red = reducao(renda)
-                renda = renda*12
-                deducao = (renda * 0.15) - red
-                rendaliquida = (renda) - deducao
-                return ("Seu imposto de renda anual é " + str(deducao) + " e sua Renda Líquida Anual é " + str(rendaliquida))
-        case 2:
-            print("==================================================================== \n")
-            print("                              SAINDO...                               \n ")
-            return "==================================================================== \n"
 
-        case _:
-            return "Não existe essa opção, tente novamente"
-            
-escolha = int(0)
+#imposto de renda
+def calcular_ir(renda):
+    if (renda <= 2428.80):
+        aliquota = 0
+    elif (renda <= 2826.65):
+        aliquota = 0.075
+    elif (renda <= 3751.05):
+        aliquota = 0.15
+    elif (renda <= 4664.68):
+        aliquota = 0.225
+    else:
+        aliquota = 0.275
 
-while (escolha != 2):
-    print("====================================================================")
-    print("                    CALCULADORA DE IMPOSTO DE RENDA                 ")
-    print("==================================================================== \n")
-    print("[0] - Imposto de Renda Mensal")
-    print("[1] - Imposto de Renda Anual")
-    print("[2] - Sair \n")
-    print("==================================================================== \n")
+    red = reducao(renda)
 
-    escolha = int(input("Digite a opção que deseja: \n"))
-    print(imposto(escolha))
+    imposto = (renda * aliquota) - red
+    imposto = max(imposto, 0)
 
+    return imposto
+
+
+#menu prinpal
+def sistema_ir():
+    while (True):
+        print("====================================================================")
+        print("                    CALCULADORA DE IMPOSTO DE RENDA                 ")
+        print("====================================================================\n")
+        print("[0] - Imposto de Renda Mensal")
+        print("[1] - Imposto de Renda Anual")
+        print("[2] - Sair\n")
+        print("====================================================================\n")
+
+        escolha = int(input("Digite a opção que deseja: "))
+
+        # mensal
+        if escolha == 0:
+            renda = float(input("\nDigite sua renda mensal: "))
+
+            imposto = calcular_ir(renda)
+            liquido = renda - imposto
+
+            print(f"\nImposto: R$ {imposto:.2f}")
+            print(f"Renda líquida: R$ {liquido:.2f}\n")
+
+        # anual
+        elif escolha == 1:
+            renda_mensal = float(input("\nDigite sua renda mensal: "))
+
+            imposto_mensal = calcular_ir(renda_mensal)
+
+            imposto_anual = imposto_mensal * 12
+            renda_anual = renda_mensal * 12
+            liquido_anual = renda_anual - imposto_anual
+
+            print(f"\nImposto anual: R$ {imposto_anual:.2f}")
+            print(f"Renda líquida anual: R$ {liquido_anual:.2f}\n")
+
+        # sair
+        elif escolha == 2:
+            print("\nSaindo...")
+            break
+
+        else:
+            print("\nOpção inválida!\n")
+
+sistema_ir()
