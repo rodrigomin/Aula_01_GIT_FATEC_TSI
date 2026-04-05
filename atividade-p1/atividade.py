@@ -5,6 +5,7 @@
 # use esse site https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2026/01/nova-tabela-do-ir-veja-faixas-e-aliquotas-e-saiba-mais-sobre-medida-que-isenta-o-pagamento-para-quem-ganha-ate-r-5-mil
 
 #reducao
+
 def reducao(renda):
     if renda < 5000:
         return 312.89
@@ -38,29 +39,36 @@ def calcular_ir(renda):
 #menu prinpal
 def sistema_ir():
     while (True):
-        print("====================================================================")
+        print("=" * 70)
         print("                    CALCULADORA DE IMPOSTO DE RENDA                 ")
-        print("====================================================================\n")
-        print("[0] - Imposto de Renda Mensal")
+        print("=" * 70)
+        print("\n[0] - Imposto de Renda Mensal")
         print("[1] - Imposto de Renda Anual")
         print("[2] - Sair\n")
-        print("====================================================================\n")
+        print("=" * 70)
 
-        escolha = int(input("Digite a opção que deseja: "))
+        escolha = int(input("\nDigite a opção que deseja: "))
 
         # mensal
         if escolha == 0:
-            renda = float(input("\nDigite sua renda mensal: "))
+
+            print("=" * 70)
+
+            renda = float(input("\nDigite sua renda mensal: \n"))
 
             imposto = calcular_ir(renda)
             liquido = renda - imposto
 
+            print("\n" + "=" * 70)
             print(f"\nImposto: R$ {imposto:.2f}")
             print(f"Renda líquida: R$ {liquido:.2f}\n")
+            
 
         # anual
         elif escolha == 1:
-            renda_mensal = float(input("\nDigite sua renda mensal: "))
+            print("=" * 70)
+
+            renda_mensal = float(input("\nDigite sua renda mensal: \n"))
 
             imposto_mensal = calcular_ir(renda_mensal)
 
@@ -68,12 +76,15 @@ def sistema_ir():
             renda_anual = renda_mensal * 12
             liquido_anual = renda_anual - imposto_anual
 
+            print("\n" + "=" * 70)
             print(f"\nImposto anual: R$ {imposto_anual:.2f}")
             print(f"Renda líquida anual: R$ {liquido_anual:.2f}\n")
 
         # sair
         elif escolha == 2:
-            print("\nSaindo...")
+            print("\n" + "=" * 70)
+            print("                              SAINDO...")
+            print("=" * 70)
             break
 
         else:
