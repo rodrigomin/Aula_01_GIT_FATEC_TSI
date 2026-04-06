@@ -8,7 +8,7 @@
 
 def reducao(renda):
     if (renda < 5000):
-        return 312.89
+        return 312.89 # NAO PAGA NADA
     elif (renda < 7350):
         return 978.62 - (0.133145 * renda)
     else:
@@ -16,22 +16,31 @@ def reducao(renda):
 
 
 #imposto de renda
-def calcular_ir(renda):
+def calcular_ir(renda, descontos):
+    imposto = renda - descontos
+    
     if (renda <= 2428.80):
         aliquota = 0
+        deducao = 0
     elif (renda <= 2826.65):
         aliquota = 0.075
+        deducao =  182.16
     elif (renda <= 3751.05):
         aliquota = 0.15
-    elif (renda <= 4664.68):
+        deducao =  394.16
+    elif (renda <=  4664.68):
         aliquota = 0.225
+        deducao =  675.49
     else:
         aliquota = 0.275
+        deducao =  908.73
 
     red = reducao(renda)
 
-    imposto = (renda * aliquota) - red
+    
+    imposto = (imposto * aliquota) - deducao
     imposto = max(imposto, 0)
+    imposto = imposto - red
 
     return imposto
 
@@ -55,8 +64,9 @@ def sistema_ir():
             print("=" * 70)
 
             renda = float(input("\nDigite sua renda mensal: \n"))
-
-            imposto = calcular_ir(renda)
+            print("=" * 70)
+            descontos = float(input("\nDigite também os seus descontos mensais [INSS, etc]: "))
+            imposto = calcular_ir(renda, descontos)
             liquido = renda - imposto
 
             print("\n" + "=" * 70)
@@ -69,6 +79,10 @@ def sistema_ir():
             print("=" * 70)
 
             renda_mensal = float(input("\nDigite sua renda mensal: \n"))
+            print("=" * 70)
+            descontos = float(input("\nDigite também os seus descontos mensais [INSS, etc]: "))
+            imposto = calcular_ir(renda, descontos)
+            
 
             imposto_mensal = calcular_ir(renda_mensal)
 
