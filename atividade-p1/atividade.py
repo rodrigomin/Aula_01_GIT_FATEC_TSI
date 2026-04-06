@@ -7,9 +7,9 @@
 #reducao
 
 def reducao(renda):
-    if renda < 5000:
+    if (renda < 5000):
         return 312.89
-    elif renda < 7350:
+    elif (renda < 7350):
         return 978.62 - (0.133145 * renda)
     else:
         return 0
