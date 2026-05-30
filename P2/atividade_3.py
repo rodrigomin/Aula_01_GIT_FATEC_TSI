@@ -26,30 +26,20 @@ def certo():
     cont_impares = 0
 
     numero = 1
+
     while numero != 0:
         numero = int(input("Digite um número (0 para sair): "))
 
-        if numero % 2 != 0:
+        if numero != 0 and numero % 2 != 0:
             soma_impares += numero
             cont_impares += 1
-            print(soma_impares, cont_impares)
-        else:
+        elif numero != 0:
             print("Esse número não é ímpar")
 
-    """
-        try:
-            media = soma_impares / cont_impares
-            print("A média dos ímpares é: ", media)
-        except(ZeroDivisionError):
-            print("ERRO: Não foi colocado números ímpares")
-    """
-
-    # OUUUUUU
-
-    if (soma_impares > 0):
+    if cont_impares > 0:
         media = soma_impares / cont_impares
-        print("A média dos ímpares é: ", media)
+        print("A média dos ímpares é:", media)
     else:
-        print("ERRO: Não foi colocado números ímpares, portanto a média é ", 0)
+        print("ERRO: Não foi colocado números ímpares, portanto a média é 0")
 
 certo()
